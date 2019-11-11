@@ -30,3 +30,18 @@
 *.exe
 *.out
 *.app
+
+# Visual Default
+*.ilk
+*.aps
+*.suo
+*.sdf
+*.opensdf
+
+*.log
+*.tlog
+*.pdb
+*.idb
+*.db
+*.opendb
+*.ipch
