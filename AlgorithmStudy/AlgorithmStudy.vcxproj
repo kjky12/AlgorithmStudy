@@ -178,7 +178,99 @@
     <ClCompile Include="1.Basic_100\Problem019.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="1.Basic_100\Problem020.cpp" />
+    <ClCompile Include="1.Basic_100\Problem020.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem021.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem022.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem023.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem024.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem025.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem026.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem027.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem028.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem029.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem030.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem031.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem032.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem033.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem034.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem035.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem036.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem037.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem038.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem039.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem040.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem041.cpp" />
+    <ClCompile Include="1.Basic_100\Problem042.cpp" />
+    <ClCompile Include="1.Basic_100\Problem043.cpp" />
+    <ClCompile Include="1.Basic_100\Problem044.cpp" />
+    <ClCompile Include="1.Basic_100\Problem045.cpp" />
+    <ClCompile Include="1.Basic_100\Problem046.cpp" />
+    <ClCompile Include="1.Basic_100\Problem047.cpp" />
+    <ClCompile Include="1.Basic_100\Problem048.cpp" />
+    <ClCompile Include="1.Basic_100\Problem049.cpp" />
+    <ClCompile Include="1.Basic_100\Problem050.cpp" />
+    <ClCompile Include="1.Basic_100\Problem051.cpp" />
+    <ClCompile Include="1.Basic_100\Problem052.cpp" />
+    <ClCompile Include="1.Basic_100\Problem053.cpp" />
+    <ClCompile Include="1.Basic_100\Problem054.cpp" />
+    <ClCompile Include="1.Basic_100\Problem055.cpp" />
+    <ClCompile Include="1.Basic_100\Problem056.cpp" />
+    <ClCompile Include="1.Basic_100\Problem057.cpp" />
+    <ClCompile Include="1.Basic_100\Problem058.cpp" />
+    <ClCompile Include="1.Basic_100\Problem059.cpp" />
+    <ClCompile Include="1.Basic_100\Problem060.cpp" />
+    <ClCompile Include="1.Basic_100\Problem061.cpp" />
+    <ClCompile Include="1.Basic_100\Problem062.cpp" />
+    <ClCompile Include="1.Basic_100\Problem063.cpp" />
+    <ClCompile Include="1.Basic_100\Problem064.cpp" />
+    <ClCompile Include="1.Basic_100\Problem065.cpp" />
+    <ClCompile Include="1.Basic_100\Problem066.cpp" />
+    <ClCompile Include="1.Basic_100\Problem067.cpp" />
+    <ClCompile Include="1.Basic_100\Problem068.cpp" />
+    <ClCompile Include="1.Basic_100\Problem069.cpp" />
+    <ClCompile Include="1.Basic_100\Problem070.cpp" />
     <ClCompile Include="Common\algorithm_Sample.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
