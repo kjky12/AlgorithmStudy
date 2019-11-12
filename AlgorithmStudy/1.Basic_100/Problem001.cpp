@@ -1,10 +1,15 @@
-#include <stdio.h>
+#include <iostream>
 
-int main()
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+
+void main() 
 {
+	int a = 0;
 
-	printf("Hello");
+	int b = 0;
 
-	return 0;
+
 }
-
