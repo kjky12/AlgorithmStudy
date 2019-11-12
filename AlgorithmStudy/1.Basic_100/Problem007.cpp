@@ -3,7 +3,7 @@
 int main()
 {
 
-	printf("Hello");
+	printf("\"C:\\Download\\hello.cpp\"");
 
 	return 0;
 }
