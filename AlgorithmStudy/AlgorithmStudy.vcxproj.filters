@@ -255,5 +255,95 @@
     <ClCompile Include="1.Basic_100\Problem070.cpp">
       <Filter>소스 파일\1.Basic_100</Filter>
     </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem071.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem072.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem073.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem074.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem075.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem076.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem078.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem079.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem080.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem081.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem082.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem083.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem084.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem085.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem086.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem087.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem088.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem089.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem090.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem091.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem092.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem093.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem094.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem095.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem096.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem097.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem098.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem099.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem100.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="1.Basic_100\Problem077.cpp">
+      <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
