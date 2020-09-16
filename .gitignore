@@ -45,3 +45,6 @@
 *.db
 *.opendb
 *.ipch
+*.enc
+AlgorithmStudy\Debug
+/AlgorithmStudy/문제.txt
