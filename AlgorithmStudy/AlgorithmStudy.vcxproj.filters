@@ -19,6 +19,12 @@
     <Filter Include="소스 파일\참고">
       <UniqueIdentifier>{60c96d1c-9469-4661-b3d2-704213ff0acb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PROGRAMERS">
+      <UniqueIdentifier>{4fa89f2e-f860-4fd4-b9e4-cda48249c7dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PROGRAMERS\KAKAO20200912">
+      <UniqueIdentifier>{d0115ee1-9488-40b0-9074-72922eade624}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="1.Basic_100\Problem020.cpp">
@@ -344,6 +350,18 @@
     </ClCompile>
     <ClCompile Include="1.Basic_100\Problem077.cpp">
       <Filter>소스 파일\1.Basic_100</Filter>
+    </ClCompile>
+    <ClCompile Include="main_kakao1번완료.cpp">
+      <Filter>PROGRAMERS\KAKAO20200912</Filter>
+    </ClCompile>
+    <ClCompile Include="main_kakao2번완료.cpp">
+      <Filter>PROGRAMERS\KAKAO20200912</Filter>
+    </ClCompile>
+    <ClCompile Include="main_kakao3번미완료.cpp">
+      <Filter>PROGRAMERS\KAKAO20200912</Filter>
+    </ClCompile>
+    <ClCompile Include="Programmers_42840.cpp">
+      <Filter>PROGRAMERS</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
