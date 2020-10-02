@@ -351,17 +351,23 @@
     <ClCompile Include="1.Basic_100\Problem077.cpp">
       <Filter>소스 파일\1.Basic_100</Filter>
     </ClCompile>
-    <ClCompile Include="main_kakao1번완료.cpp">
+    <ClCompile Include="Finish\main_kakao3번미완료.cpp">
       <Filter>PROGRAMERS\KAKAO20200912</Filter>
     </ClCompile>
-    <ClCompile Include="main_kakao2번완료.cpp">
+    <ClCompile Include="Finish\main_kakao2번완료.cpp">
       <Filter>PROGRAMERS\KAKAO20200912</Filter>
     </ClCompile>
-    <ClCompile Include="main_kakao3번미완료.cpp">
+    <ClCompile Include="Finish\main_kakao1번완료.cpp">
       <Filter>PROGRAMERS\KAKAO20200912</Filter>
     </ClCompile>
-    <ClCompile Include="Programmers_42840.cpp">
+    <ClCompile Include="Finish\Programmers_42840.cpp">
       <Filter>PROGRAMERS</Filter>
+    </ClCompile>
+    <ClCompile Include="Finish\Programmers_42842.cpp">
+      <Filter>PROGRAMERS</Filter>
+    </ClCompile>
+    <ClCompile Include="Finish\Programmers_42862.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
