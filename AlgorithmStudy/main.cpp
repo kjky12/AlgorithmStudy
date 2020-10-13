@@ -15,92 +15,51 @@ using namespace std;
 
 
 /*
-https://programmers.co.kr/learn/courses/30/lessons/42862
+https://programmers.co.kr/learn/courses/30/lessons/43105
 *
 문제 설명
-점심시간에 도둑이 들어, 일부 학생이 체육복을 도난당했습니다. 다행히 여벌 체육복이 있는 학생이 이들에게 체육복을 빌려주려 합니다. 학생들의 번호는 체격 순으로 매겨져 있어, 바로 앞번호의 학생이나 바로 뒷번호의 학생에게만 체육복을 빌려줄 수 있습니다. 예를 들어, 4번 학생은 3번 학생이나 5번 학생에게만 체육복을 빌려줄 수 있습니다. 체육복이 없으면 수업을 들을 수 없기 때문에 체육복을 적절히 빌려 최대한 많은 학생이 체육수업을 들어야 합니다.
+스크린샷 2018-09-14 오후 5.44.19.png
 
-전체 학생의 수 n, 체육복을 도난당한 학생들의 번호가 담긴 배열 lost, 여벌의 체육복을 가져온 학생들의 번호가 담긴 배열 reserve가 매개변수로 주어질 때, 체육수업을 들을 수 있는 학생의 최댓값을 return 하도록 solution 함수를 작성해주세요.
+위와 같은 삼각형의 꼭대기에서 바닥까지 이어지는 경로 중, 거쳐간 숫자의 합이 가장 큰 경우를 찾아보려고 합니다. 아래 칸으로 이동할 때는 대각선 방향으로 한 칸 오른쪽 또는 왼쪽으로만 이동 가능합니다. 예를 들어 3에서는 그 아래칸의 8 또는 1로만 이동이 가능합니다.
+
+삼각형의 정보가 담긴 배열 triangle이 매개변수로 주어질 때, 거쳐간 숫자의 최댓값을 return 하도록 solution 함수를 완성하세요.
 
 제한사항
-전체 학생의 수는 2명 이상 30명 이하입니다.
-체육복을 도난당한 학생의 수는 1명 이상 n명 이하이고 중복되는 번호는 없습니다.
-여벌의 체육복을 가져온 학생의 수는 1명 이상 n명 이하이고 중복되는 번호는 없습니다.
-여벌 체육복이 있는 학생만 다른 학생에게 체육복을 빌려줄 수 있습니다.
-여벌 체육복을 가져온 학생이 체육복을 도난당했을 수 있습니다. 이때 이 학생은 체육복을 하나만 도난당했다고 가정하며, 남은 체육복이 하나이기에 다른 학생에게는 체육복을 빌려줄 수 없습니다.
+삼각형의 높이는 1 이상 500 이하입니다.
+삼각형을 이루고 있는 숫자는 0 이상 9,999 이하의 정수입니다.
 입출력 예
-n	lost	reserve	return
-5	[2, 4]	[1, 3, 5]	5
-5	[2, 4]	[3]	4
-3	[3]	[1]	2
-입출력 예 설명
-예제 #1
-1번 학생이 2번 학생에게 체육복을 빌려주고, 3번 학생이나 5번 학생이 4번 학생에게 체육복을 빌려주면 학생 5명이 체육수업을 들을 수 있습니다.
-
-예제 #2
-3번 학생이 2번 학생이나 4번 학생에게 체육복을 빌려주면 학생 4명이 체육수업을 들을 수 있습니다.
-
-
-
-
+triangle	result
+[[7], [3, 8], [8, 1, 0], [2, 7, 4, 4], [4, 5, 2, 6, 5]]	30
 
 */
 
-int solution(int n, vector<int> lost, vector<int> reserve) {
+int solution(vector<vector<int>> triangle) 
+{
+	int answer = 0;
 
-	//! 여벌 체육복을 가져온 학생이 체육복을 도난 먼저 선처리
-	for (size_t i = 0; i < lost.size(); i++)
+	vector<vector<int>> dp(triangle.size());
+	for (size_t i = 0; i < triangle.size(); i++)	//! 마지막은 더해지는 부분이니까 접근할 필욘 없음
 	{
-		size_t j = 0;
-		for (j = 0; j < reserve.size(); j++)
-		{
-			if (lost[i] == reserve[j])
-			{
-				lost.erase(lost.begin() + i);
-				reserve.erase(reserve.begin() + j);
-				i--;
-				j--;
-
-				break;
-			}
-
-		}
-
+		if(i == 0)
+			dp[i].resize(1);
+		else
+			dp[i].resize((triangle[i - 1].size()) * 2);
 	}
 
-	for (size_t i = 0; i < lost.size(); i++)
+	dp[0][0] = triangle[0][0];
+	
+	for (int i = 0; i < triangle.size() - 1; i++) 
 	{
-		bool bFlag = false;
-		size_t j = 0;
-		for (j = 0; j < reserve.size(); j++)
+		for (int j = 0; j < triangle[i].size(); j++) 
 		{
-			////! 여벌 체육복을 가져온 학생이 체육복을 도난
-			//if (lost[i] == reserve[j])
-			//{
-			//	bFlag = true;
-			//	break;
-			//}
-
-			if (lost[i] + 1 >= reserve[j] && lost[i] - 1 <= reserve[j])
-			{
-				bFlag = true;
-				break;
-			}
+			int nIdx = j * 2;
+			dp[i + 1][nIdx] = dp[i][j] + triangle[i + 1][j];
+			dp[i + 1][nIdx + 1] = dp[i][j] + triangle[i + 1][j + 1];
 		}
-
-		if (bFlag)
-		{
-			lost.erase(lost.begin() + i);
-			reserve.erase(reserve.begin() + j);
-			i--;
-			j--;
-		}
-
 	}
 
-	int answer = n - lost.size();
-
-
+	
+	answer = *max_element(dp[dp.size() - 1].begin(), dp[dp.size() - 1].end());
 
 	return answer;
 }
@@ -108,19 +67,37 @@ int solution(int n, vector<int> lost, vector<int> reserve) {
 int main()
 {
 	int n = 5;
-	vector<int> lost;
-	vector<int> reserve;
+	vector<vector<int>> triangle;
 
-	const int nTmp1 = 2;
-	int naTmp1[nTmp1] = { 2, 4 };
-	lost.assign(naTmp1, naTmp1 + nTmp1);
+	vector<int>	vecTemp;
 
-	const int nTmp2 = 3;
-	int naTmp2[nTmp2] = { 1, 3, 5 };
-	reserve.assign(naTmp2, naTmp2 + nTmp2);
+	const int nTmp1 = 1;
+	int naTmp1[nTmp1] = { 7 };
+	vecTemp.assign(naTmp1, naTmp1 + nTmp1);
+	triangle.push_back(vecTemp);
+
+	const int nTmp2 = 2;
+	int naTmp2[nTmp2] = { 3, 8 };
+	vecTemp.assign(naTmp2, naTmp2 + nTmp2);
+	triangle.push_back(vecTemp);
+
+	const int nTmp3 = 3;
+	int naTmp3[nTmp3] = { 8, 1, 0 };
+	vecTemp.assign(naTmp3, naTmp3 + nTmp3);
+	triangle.push_back(vecTemp);
+
+	const int nTmp4 = 4;
+	int naTmp4[nTmp4] = { 2, 7, 4, 4 };
+	vecTemp.assign(naTmp4, naTmp4 + nTmp4);
+	triangle.push_back(vecTemp);
+
+	const int nTmp5 = 5;
+	int naTmp5[nTmp5] = { 4, 5, 2, 6, 5 };
+	vecTemp.assign(naTmp5, naTmp5 + nTmp5);
+	triangle.push_back(vecTemp);
 
 
-	solution(n, lost, reserve);
+	solution(triangle);
 
 
 	return 0;
