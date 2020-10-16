@@ -38,37 +38,28 @@ numbers	target	return
 입출력 예 설명
 
 */
-
-void dfs_recursion(vector<vector<int>>	*pvecPlusMinus, int nDepth)
+int nCnt = 0;
+void dfs(const vector<int>& numbers, const int target, int nDepth, int nSum)
 {
-
-
-	for (size_t i = 0; i < length; i++)
+	
+	if (nDepth == numbers.size())
 	{
-
+		if (nSum == target)
+			nCnt++;
+		return;
 	}
+
+	dfs(numbers, target, nDepth + 1, nSum + numbers[nDepth]);
+	dfs(numbers, target, nDepth + 1, nSum + numbers[nDepth] * -1);
+
 
 }
 
 int solution(vector<int> numbers, int target) 
 {
-	vector<vector<int>>	vecPlusMinus(numbers.size(), vector<int>(2));
-	for (size_t i = 0; i < vecPlusMinus.size(); i++)
-	{
-		vecPlusMinus[i][0] = +1;
-		vecPlusMinus[i][1] = -1;
-	}
-
 	int answer = 0;
 
-	vector<vector<int>>	vecResult(numbers.size() * 2, vector<int>(numbers.size()));
-
-	for (size_t i = 0; i < 2; i++)
-	{
-		dfs_recursion(&vecPlusMinus, i);
-	}
-	
-
+	dfs(numbers, target, 0, 0);
 
 	return answer;
 }
