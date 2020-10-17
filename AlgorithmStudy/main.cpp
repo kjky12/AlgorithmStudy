@@ -7,6 +7,7 @@
 #include "string.h"
 
 #include "algorithm"
+#include "math.h"
 
 //! 백터 사용
 #include <vector>
@@ -15,70 +16,99 @@ using namespace std;
 
 
 /*
-https://programmers.co.kr/learn/courses/30/lessons/43165
-*
+
+https://programmers.co.kr/learn/courses/30/lessons/42860
 
 문제 설명
-n개의 음이 아닌 정수가 있습니다. 이 수를 적절히 더하거나 빼서 타겟 넘버를 만들려고 합니다. 예를 들어 [1, 1, 1, 1, 1]로 숫자 3을 만들려면 다음 다섯 방법을 쓸 수 있습니다.
+조이스틱으로 알파벳 이름을 완성하세요. 맨 처음엔 A로만 이루어져 있습니다.
+ex) 완성해야 하는 이름이 세 글자면 AAA, 네 글자면 AAAA
 
--1+1+1+1+1 = 3
-+1-1+1+1+1 = 3
-+1+1-1+1+1 = 3
-+1+1+1-1+1 = 3
-+1+1+1+1-1 = 3
-사용할 수 있는 숫자가 담긴 배열 numbers, 타겟 넘버 target이 매개변수로 주어질 때 숫자를 적절히 더하고 빼서 타겟 넘버를 만드는 방법의 수를 return 하도록 solution 함수를 작성해주세요.
+조이스틱을 각 방향으로 움직이면 아래와 같습니다.
 
-제한사항
-주어지는 숫자의 개수는 2개 이상 20개 이하입니다.
-각 숫자는 1 이상 50 이하인 자연수입니다.
-타겟 넘버는 1 이상 1000 이하인 자연수입니다.
+▲ - 다음 알파벳
+▼ - 이전 알파벳 (A에서 아래쪽으로 이동하면 Z로)
+◀ - 커서를 왼쪽으로 이동 (첫 번째 위치에서 왼쪽으로 이동하면 마지막 문자에 커서)
+▶ - 커서를 오른쪽으로 이동
+예를 들어 아래의 방법으로 JAZ를 만들 수 있습니다.
+
+- 첫 번째 위치에서 조이스틱을 위로 9번 조작하여 J를 완성합니다.
+- 조이스틱을 왼쪽으로 1번 조작하여 커서를 마지막 문자 위치로 이동시킵니다.
+- 마지막 위치에서 조이스틱을 아래로 1번 조작하여 Z를 완성합니다.
+따라서 11번 이동시켜 "JAZ"를 만들 수 있고, 이때가 최소 이동입니다.
+만들고자 하는 이름 name이 매개변수로 주어질 때, 이름에 대해 조이스틱 조작 횟수의 최솟값을 return 하도록 solution 함수를 만드세요.
+
+제한 사항
+name은 알파벳 대문자로만 이루어져 있습니다.
+name의 길이는 1 이상 20 이하입니다.
 입출력 예
-numbers	target	return
-[1, 1, 1, 1, 1]	3	5
-입출력 예 설명
+name	return
+JEROEN	56
+JAN	23
 
 */
-int nCnt = 0;
-void dfs(const vector<int>& numbers, const int target, int nDepth, int nSum)
+
+char chCurrentPos = 'A';
+
+//! 좌우 방향키만으로 움직여서 가는 개수 카운트
+int GetLeftRightMoveCnt(char chTarget)
 {
-	
-	if (nDepth == numbers.size())
-	{
-		if (nSum == target)
-			nCnt++;
-		return;
-	}
-
-	dfs(numbers, target, nDepth + 1, nSum + numbers[nDepth]);
-	dfs(numbers, target, nDepth + 1, nSum + numbers[nDepth] * -1);
-
-
+	int nStep = abs(chCurrentPos - chTarget);
+	return nStep;
 }
 
-int solution(vector<int> numbers, int target) 
+
+//! 오른쪽으로 붙어서 움직여서 가는 개수 카운트
+int GetRightAndMoveCnt(char chTarget)
 {
+	int nStep = 0;
+	if (chCurrentPos != 'Z')
+		nStep++;
+
+	nStep += abs('Z' - chTarget);
+
+	return nStep;
+}
+
+//! 왼쪽으로 붙어서 움직여서 가는 개수 카운트
+int GetLeftAndMoveCnt(char chTarget)
+{
+	int nStep = 0;
+	if (chCurrentPos != 'A')
+		nStep++;
+
+	nStep += abs('A' - chTarget);
+
+	return nStep;
+}
+
+
+int solution(string name) {
+	
+	chCurrentPos = 'A';
 	int answer = 0;
 
-	dfs(numbers, target, 0, 0);
+	for (size_t i = 0; i < name.length(); i++)
+	{
+		int nMove1 = GetLeftRightMoveCnt(name[i]);
+		int nMove2 = GetRightAndMoveCnt(name[i]);
+		//int nMove3 = GetLeftAndMoveCnt(name[i]);
+
+		int Min = min(nMove1, nMove2);
+		//Min = min(Min, nMove3);
+
+		answer += Min;
+		chCurrentPos = name[i];
+	}
 
 	return answer;
 }
+
 int main()
 {
-	int n = 5;
-	vector<vector<int>> triangle;
-
-	vector<int>	vecTemp;
-
-	const int nTmp1 = 5;
-	int naTmp1[nTmp1] = { 1, 1, 1, 1, 1 };
-	vecTemp.assign(naTmp1, naTmp1 + nTmp1);
-	triangle.push_back(vecTemp);
-
-
-	int ntarget = 3;
-	solution(vecTemp, ntarget);
-
+	
+	solution("JAZ");
+	solution("JEROEN");
+	solution("JAN");
 
 	return 0;
 }

@@ -48,4 +48,4 @@
 *.enc
 AlgorithmStudy\Debug
 /AlgorithmStudy/문제.txt
-/.vs/
+vs/

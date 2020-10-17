@@ -372,5 +372,17 @@
     <ClCompile Include="Finish\Programmers_43105.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Finish\Programmers_43165.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Finish\Programmers_Lv1_challenge_id=906.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Finish\Programmers_43162_Fail.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Finish\Programmers_12899.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
