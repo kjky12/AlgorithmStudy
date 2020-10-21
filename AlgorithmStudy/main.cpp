@@ -1,7 +1,7 @@
 //! 출력 사용
 #include <iostream>
+#include <fstream>
 
-//! 문자열 사용
 #include "string"
 //! 문자열 함수 사용
 #include "string.h"
@@ -17,98 +17,80 @@ using namespace std;
 
 /*
 
-https://programmers.co.kr/learn/courses/30/lessons/42860
+https://programmers.co.kr/learn/courses/30/lessons/42883
 
 문제 설명
-조이스틱으로 알파벳 이름을 완성하세요. 맨 처음엔 A로만 이루어져 있습니다.
-ex) 완성해야 하는 이름이 세 글자면 AAA, 네 글자면 AAAA
+어떤 숫자에서 k개의 수를 제거했을 때 얻을 수 있는 가장 큰 숫자를 구하려 합니다.
 
-조이스틱을 각 방향으로 움직이면 아래와 같습니다.
+예를 들어, 숫자 1924에서 수 두 개를 제거하면 [19, 12, 14, 92, 94, 24] 를 만들 수 있습니다. 이 중 가장 큰 숫자는 94 입니다.
 
-▲ - 다음 알파벳
-▼ - 이전 알파벳 (A에서 아래쪽으로 이동하면 Z로)
-◀ - 커서를 왼쪽으로 이동 (첫 번째 위치에서 왼쪽으로 이동하면 마지막 문자에 커서)
-▶ - 커서를 오른쪽으로 이동
-예를 들어 아래의 방법으로 JAZ를 만들 수 있습니다.
+문자열 형식으로 숫자 number와 제거할 수의 개수 k가 solution 함수의 매개변수로 주어집니다. number에서 k 개의 수를 제거했을 때 만들 수 있는 수 중 가장 큰 숫자를 문자열 형태로 return 하도록 solution 함수를 완성하세요.
 
-- 첫 번째 위치에서 조이스틱을 위로 9번 조작하여 J를 완성합니다.
-- 조이스틱을 왼쪽으로 1번 조작하여 커서를 마지막 문자 위치로 이동시킵니다.
-- 마지막 위치에서 조이스틱을 아래로 1번 조작하여 Z를 완성합니다.
-따라서 11번 이동시켜 "JAZ"를 만들 수 있고, 이때가 최소 이동입니다.
-만들고자 하는 이름 name이 매개변수로 주어질 때, 이름에 대해 조이스틱 조작 횟수의 최솟값을 return 하도록 solution 함수를 만드세요.
-
-제한 사항
-name은 알파벳 대문자로만 이루어져 있습니다.
-name의 길이는 1 이상 20 이하입니다.
+제한 조건
+number는 1자리 이상, 1,000,000자리 이하인 숫자입니다.
+k는 1 이상 number의 자릿수 미만인 자연수입니다.
 입출력 예
-name	return
-JEROEN	56
-JAN	23
+number	k	return
+1924	2	94
+1231234	3	3234
+4177252841	4	775841
 
 */
+using namespace std;
 
-char chCurrentPos = 'A';
+//[10/21/2020 kjky12] 접근 방향은 맞는듯 하나 중간에 if문이 들어가서 효율성이 안되고 중간중간 erase를 해주니 느림...
+// -> 추가적으로 인덱스를 통해 값을 추출하여야 할듯하다
+string solution(string number, int k) {
+	string answer = "";
 
-//! 좌우 방향키만으로 움직여서 가는 개수 카운트
-int GetLeftRightMoveCnt(char chTarget)
-{
-	int nStep = abs(chCurrentPos - chTarget);
-	return nStep;
-}
+	//! 정답의 길이!
+	int nAnswerCnt = number.length() - k;
 
-
-//! 오른쪽으로 붙어서 움직여서 가는 개수 카운트
-int GetRightAndMoveCnt(char chTarget)
-{
-	int nStep = 0;
-	if (chCurrentPos != 'Z')
-		nStep++;
-
-	nStep += abs('Z' - chTarget);
-
-	return nStep;
-}
-
-//! 왼쪽으로 붙어서 움직여서 가는 개수 카운트
-int GetLeftAndMoveCnt(char chTarget)
-{
-	int nStep = 0;
-	if (chCurrentPos != 'A')
-		nStep++;
-
-	nStep += abs('A' - chTarget);
-
-	return nStep;
-}
-
-
-int solution(string name) {
-	
-	chCurrentPos = 'A';
-	int answer = 0;
-
-	for (size_t i = 0; i < name.length(); i++)
+	while (true)
 	{
-		int nMove1 = GetLeftRightMoveCnt(name[i]);
-		int nMove2 = GetRightAndMoveCnt(name[i]);
-		//int nMove3 = GetLeftAndMoveCnt(name[i]);
+		int nSize = number.length();
+		for (size_t i = 0; i < nSize - 1; i++)
+		{
 
-		int Min = min(nMove1, nMove2);
-		//Min = min(Min, nMove3);
+			for (size_t j = i + 1; j < nSize; j++)
+			{
+				if (number[i] < number[j])
+				{
+					int nDelCnt = j - i;
+					if (number.length() - nDelCnt < nAnswerCnt)
+						break;
 
-		answer += Min;
-		chCurrentPos = name[i];
+					number.erase(i, nDelCnt);
+					k -= (j - i);
+					break;
+				}
+
+			}
+
+			if (number.length() != nSize)
+			{
+				cout << number << endl;
+
+				//nSize = number.length();
+				break;
+			}
+
+		}
+
+		if (number.length() == nAnswerCnt)
+			break;
 	}
 
+	answer = number;
 	return answer;
 }
 
+
 int main()
 {
-	
-	solution("JAZ");
-	solution("JEROEN");
-	solution("JAN");
+	//solution("1924", 2);
+	//solution("1231234", 3);
+	solution("4177252841", 4);
 
 	return 0;
 }

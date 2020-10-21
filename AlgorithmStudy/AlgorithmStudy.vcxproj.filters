@@ -366,22 +366,28 @@
     <ClCompile Include="Finish\Programmers_42842.cpp">
       <Filter>PROGRAMERS</Filter>
     </ClCompile>
+    <ClCompile Include="Finish\Programmers_12899.cpp">
+      <Filter>PROGRAMERS</Filter>
+    </ClCompile>
     <ClCompile Include="Finish\Programmers_42862.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>PROGRAMERS</Filter>
     </ClCompile>
     <ClCompile Include="Finish\Programmers_43105.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Finish\Programmers_43165.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Finish\Programmers_Lv1_challenge_id=906.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>PROGRAMERS</Filter>
     </ClCompile>
     <ClCompile Include="Finish\Programmers_43162_Fail.cpp">
+      <Filter>PROGRAMERS</Filter>
+    </ClCompile>
+    <ClCompile Include="Finish\Programmers_43165.cpp">
+      <Filter>PROGRAMERS</Filter>
+    </ClCompile>
+    <ClCompile Include="Finish\Programmers_Lv1_challenge_id=906.cpp">
+      <Filter>PROGRAMERS</Filter>
+    </ClCompile>
+    <ClCompile Include="Finish\Programmers_42860_NO.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Finish\Programmers_12899.cpp">
+    <ClCompile Include="Finish\CLOUD_NHN_PreTest.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
