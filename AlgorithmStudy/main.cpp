@@ -17,80 +17,68 @@ using namespace std;
 
 /*
 
-https://programmers.co.kr/learn/courses/30/lessons/42883
+https://programmers.co.kr/learn/courses/30/lessons/68644
 
 문제 설명
-어떤 숫자에서 k개의 수를 제거했을 때 얻을 수 있는 가장 큰 숫자를 구하려 합니다.
+정수 배열 numbers가 주어집니다. numbers에서 서로 다른 인덱스에 있는 두 개의 수를 뽑아 더해서 만들 수 있는 모든 수를 배열에 오름차순으로 담아 return 하도록 solution 함수를 완성해주세요.
 
-예를 들어, 숫자 1924에서 수 두 개를 제거하면 [19, 12, 14, 92, 94, 24] 를 만들 수 있습니다. 이 중 가장 큰 숫자는 94 입니다.
-
-문자열 형식으로 숫자 number와 제거할 수의 개수 k가 solution 함수의 매개변수로 주어집니다. number에서 k 개의 수를 제거했을 때 만들 수 있는 수 중 가장 큰 숫자를 문자열 형태로 return 하도록 solution 함수를 완성하세요.
-
-제한 조건
-number는 1자리 이상, 1,000,000자리 이하인 숫자입니다.
-k는 1 이상 number의 자릿수 미만인 자연수입니다.
+제한사항
+numbers의 길이는 2 이상 100 이하입니다.
+numbers의 모든 수는 0 이상 100 이하입니다.
 입출력 예
-number	k	return
-1924	2	94
-1231234	3	3234
-4177252841	4	775841
+numbers	result
+[2,1,3,4,1]	[2,3,4,5,6,7]
+[5,0,2,7]	[2,5,7,9,12]
+입출력 예 설명
+입출력 예 #1
+
+2 = 1 + 1 입니다. (1이 numbers에 두 개 있습니다.)
+3 = 2 + 1 입니다.
+4 = 1 + 3 입니다.
+5 = 1 + 4 = 2 + 3 입니다.
+6 = 2 + 4 입니다.
+7 = 3 + 4 입니다.
+따라서 [2,3,4,5,6,7] 을 return 해야 합니다.
+입출력 예 #2
+
+2 = 0 + 2 입니다.
+5 = 5 + 0 입니다.
+7 = 0 + 7 = 5 + 2 입니다.
+9 = 2 + 7 입니다.
+12 = 5 + 7 입니다.
+따라서 [2,5,7,9,12] 를 return 해야 합니다.
 
 */
 using namespace std;
 
-//[10/21/2020 kjky12] 접근 방향은 맞는듯 하나 중간에 if문이 들어가서 효율성이 안되고 중간중간 erase를 해주니 느림...
-// -> 추가적으로 인덱스를 통해 값을 추출하여야 할듯하다
-string solution(string number, int k) {
-	string answer = "";
+vector<int> solution(vector<int> numbers) 
+{
+	sort(numbers.begin(), numbers.end());
+	//numbers.erase(unique(numbers.begin(), numbers.end()), numbers.end());
 
-	//! 정답의 길이!
-	int nAnswerCnt = number.length() - k;
-
-	while (true)
+	vector<int> answer;
+	for (size_t i = 0; i < numbers.size() - 1; i++)
 	{
-		int nSize = number.length();
-		for (size_t i = 0; i < nSize - 1; i++)
+		for (size_t j = i + 1; j < numbers.size(); j++)
 		{
-
-			for (size_t j = i + 1; j < nSize; j++)
-			{
-				if (number[i] < number[j])
-				{
-					int nDelCnt = j - i;
-					if (number.length() - nDelCnt < nAnswerCnt)
-						break;
-
-					number.erase(i, nDelCnt);
-					k -= (j - i);
-					break;
-				}
-
-			}
-
-			if (number.length() != nSize)
-			{
-				cout << number << endl;
-
-				//nSize = number.length();
-				break;
-			}
-
+			answer.push_back(numbers[i] + numbers[j]);
 		}
-
-		if (number.length() == nAnswerCnt)
-			break;
 	}
+	
+	sort(answer.begin(), answer.end());
+	answer.erase(unique(answer.begin(), answer.end()), answer.end());
 
-	answer = number;
+
+
 	return answer;
 }
 
-
 int main()
 {
-	//solution("1924", 2);
-	//solution("1231234", 3);
-	solution("4177252841", 4);
+	int aT[5] = { 2,1,3,4,1 };
+	vector<int>	vecT1(aT, aT + 5);
+
+	solution(vecT1);
 
 	return 0;
 }
