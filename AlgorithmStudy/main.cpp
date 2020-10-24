@@ -1,15 +1,15 @@
-//! Ãâ·Â »ç¿ë
+ï»¿//! ì¶œë ¥ ì‚¬ìš©
 #include <iostream>
 #include <fstream>
 
 #include "string"
-//! ¹®ÀÚ¿­ ÇÔ¼ö »ç¿ë
+//! ë¬¸ìì—´ í•¨ìˆ˜ ì‚¬ìš©
 #include "string.h"
 
 #include "algorithm"
 #include "math.h"
 
-//! ¹éÅÍ »ç¿ë
+//! ë°±í„° ì‚¬ìš©
 #include <vector>
 
 using namespace std;
@@ -17,68 +17,115 @@ using namespace std;
 
 /*
 
-https://programmers.co.kr/learn/courses/30/lessons/68644
+ë¬¸ì œ ì„¤ëª…
+í•œìë¦¬ ìˆ«ìê°€ ì íŒ ì¢…ì´ ì¡°ê°ì´ í©ì–´ì ¸ìˆìŠµë‹ˆë‹¤. í©ì–´ì§„ ì¢…ì´ ì¡°ê°ì„ ë¶™ì—¬ ì†Œìˆ˜ë¥¼ ëª‡ ê°œ ë§Œë“¤ ìˆ˜ ìˆëŠ”ì§€ ì•Œì•„ë‚´ë ¤ í•©ë‹ˆë‹¤.
 
-¹®Á¦ ¼³¸í
-Á¤¼ö ¹è¿­ numbers°¡ ÁÖ¾îÁı´Ï´Ù. numbers¿¡¼­ ¼­·Î ´Ù¸¥ ÀÎµ¦½º¿¡ ÀÖ´Â µÎ °³ÀÇ ¼ö¸¦ »Ì¾Æ ´õÇØ¼­ ¸¸µé ¼ö ÀÖ´Â ¸ğµç ¼ö¸¦ ¹è¿­¿¡ ¿À¸§Â÷¼øÀ¸·Î ´ã¾Æ return ÇÏµµ·Ï solution ÇÔ¼ö¸¦ ¿Ï¼ºÇØÁÖ¼¼¿ä.
+ê° ì¢…ì´ ì¡°ê°ì— ì íŒ ìˆ«ìê°€ ì íŒ ë¬¸ìì—´ numbersê°€ ì£¼ì–´ì¡Œì„ ë•Œ, ì¢…ì´ ì¡°ê°ìœ¼ë¡œ ë§Œë“¤ ìˆ˜ ìˆëŠ” ì†Œìˆ˜ê°€ ëª‡ ê°œì¸ì§€ return í•˜ë„ë¡ solution í•¨ìˆ˜ë¥¼ ì™„ì„±í•´ì£¼ì„¸ìš”.
 
-Á¦ÇÑ»çÇ×
-numbersÀÇ ±æÀÌ´Â 2 ÀÌ»ó 100 ÀÌÇÏÀÔ´Ï´Ù.
-numbersÀÇ ¸ğµç ¼ö´Â 0 ÀÌ»ó 100 ÀÌÇÏÀÔ´Ï´Ù.
-ÀÔÃâ·Â ¿¹
-numbers	result
-[2,1,3,4,1]	[2,3,4,5,6,7]
-[5,0,2,7]	[2,5,7,9,12]
-ÀÔÃâ·Â ¿¹ ¼³¸í
-ÀÔÃâ·Â ¿¹ #1
+ì œí•œì‚¬í•­
+numbersëŠ” ê¸¸ì´ 1 ì´ìƒ 7 ì´í•˜ì¸ ë¬¸ìì—´ì…ë‹ˆë‹¤.
+numbersëŠ” 0~9ê¹Œì§€ ìˆ«ìë§Œìœ¼ë¡œ ì´ë£¨ì–´ì ¸ ìˆìŠµë‹ˆë‹¤.
+013ì€ 0, 1, 3 ìˆ«ìê°€ ì íŒ ì¢…ì´ ì¡°ê°ì´ í©ì–´ì ¸ìˆë‹¤ëŠ” ì˜ë¯¸ì…ë‹ˆë‹¤.
 
-2 = 1 + 1 ÀÔ´Ï´Ù. (1ÀÌ numbers¿¡ µÎ °³ ÀÖ½À´Ï´Ù.)
-3 = 2 + 1 ÀÔ´Ï´Ù.
-4 = 1 + 3 ÀÔ´Ï´Ù.
-5 = 1 + 4 = 2 + 3 ÀÔ´Ï´Ù.
-6 = 2 + 4 ÀÔ´Ï´Ù.
-7 = 3 + 4 ÀÔ´Ï´Ù.
-µû¶ó¼­ [2,3,4,5,6,7] À» return ÇØ¾ß ÇÕ´Ï´Ù.
-ÀÔÃâ·Â ¿¹ #2
+ì…ì¶œë ¥ ì˜ˆ
+numbers	return
+17	3
+011	2
+ì…ì¶œë ¥ ì˜ˆ ì„¤ëª…
+ì˜ˆì œ #1
+[1, 7]ìœ¼ë¡œëŠ” ì†Œìˆ˜ [7, 17, 71]ë¥¼ ë§Œë“¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
-2 = 0 + 2 ÀÔ´Ï´Ù.
-5 = 5 + 0 ÀÔ´Ï´Ù.
-7 = 0 + 7 = 5 + 2 ÀÔ´Ï´Ù.
-9 = 2 + 7 ÀÔ´Ï´Ù.
-12 = 5 + 7 ÀÔ´Ï´Ù.
-µû¶ó¼­ [2,5,7,9,12] ¸¦ return ÇØ¾ß ÇÕ´Ï´Ù.
+ì˜ˆì œ #2
+[0, 1, 1]ìœ¼ë¡œëŠ” ì†Œìˆ˜ [11, 101]ë¥¼ ë§Œë“¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+
+11ê³¼ 011ì€ ê°™ì€ ìˆ«ìë¡œ ì·¨ê¸‰í•©ë‹ˆë‹¤.
+
 
 */
 using namespace std;
 
-vector<int> solution(vector<int> numbers) 
+int solution(string numbers) 
 {
-	sort(numbers.begin(), numbers.end());
-	//numbers.erase(unique(numbers.begin(), numbers.end()), numbers.end());
-
-	vector<int> answer;
-	for (size_t i = 0; i < numbers.size() - 1; i++)
-	{
-		for (size_t j = i + 1; j < numbers.size(); j++)
-		{
-			answer.push_back(numbers[i] + numbers[j]);
-		}
-	}
+	//http://dumpsys.blogspot.com/2015/03/algorithm-binary-counting-power-set.html
+	int nSize = numbers.length();
 	
-	sort(answer.begin(), answer.end());
-	answer.erase(unique(answer.begin(), answer.end()), answer.end());
+	/////////////////////////////////////////////////
+	//! 3ìë¦¬ ë¹„íŠ¸ë§ˆìŠ¤í¬ ì¡°í•© -> ë¹„íŠ¸ë§ˆìŠ¤í¬ë¡œ ì¡°í•©ì„ ê°€ì§„ë‹¤.!!
+	int n = nSize;
+	vector<string>	vecNum;
+	for (int i = 0; i < (1 << (n)); i++)
+	{
+		string	strTemp;
+		for (int j = 0; j < n; j++) 
+		{
+			if (i & (1 << j))
+			{
+				//printf("%c ", numbers[j]);
+				strTemp += numbers[j];
+			}
+		}
+		//printf("\n");
+
+		if(strTemp.length() > 0)
+			vecNum.push_back(strTemp);
+	}
+
+	sort(vecNum.begin(), vecNum.end());
+	vecNum.erase(unique(vecNum.begin(), vecNum.end()), vecNum.end());
 
 
+	vector<int>	vecAllNum;
+	for (size_t i = 0; i < vecNum.size(); i++)
+	{
+		string	strTemp = vecNum[i];
+		//! ì†ŒíŒ…ì„ í•´ì£¼ê³  ìˆœì—´ì„ êµ¬í•´ì•¼ì§€ ì „ì²´ ìˆœì—´ì´ ì œëŒ€ë¡œ ì–»ì–´ì™€ ì§„ë‹¤!!
+		sort(strTemp.begin(), strTemp.end());
+
+		do {
+			int nValue = atoi(strTemp.c_str());
+
+			vecAllNum.push_back(nValue);
+
+		} while (next_permutation(strTemp.begin(), strTemp.end()));
+
+	}
+	int answer = 0;
+
+	sort(vecAllNum.begin(), vecAllNum.end());
+	vecAllNum.erase(unique(vecAllNum.begin(), vecAllNum.end()), vecAllNum.end());
+
+	for (size_t i = 0; i < vecAllNum.size(); i++)
+	{
+		bool bflag = true;
+		int nValue = vecAllNum[i];
+
+		if (nValue < 2)
+			continue;
+
+		for (int j = 2; j < nValue / 2 + 1; j++)
+		{
+			if (nValue % j == 0)
+			{
+				bflag = false;
+				break;
+			}
+		}
+
+		if (bflag)
+		{
+			answer++;
+		}
+
+	}
 
 	return answer;
 }
 
+
 int main()
 {
-	int aT[5] = { 2,1,3,4,1 };
-	vector<int>	vecT1(aT, aT + 5);
 
-	solution(vecT1);
+	solution("48924");
 
 	return 0;
 }
