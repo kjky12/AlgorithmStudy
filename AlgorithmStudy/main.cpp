@@ -17,115 +17,106 @@ using namespace std;
 
 /*
 
+https://programmers.co.kr/learn/courses/30/lessons/49993
+
 문제 설명
-한자리 숫자가 적힌 종이 조각이 흩어져있습니다. 흩어진 종이 조각을 붙여 소수를 몇 개 만들 수 있는지 알아내려 합니다.
+선행 스킬이란 어떤 스킬을 배우기 전에 먼저 배워야 하는 스킬을 뜻합니다.
 
-각 종이 조각에 적힌 숫자가 적힌 문자열 numbers가 주어졌을 때, 종이 조각으로 만들 수 있는 소수가 몇 개인지 return 하도록 solution 함수를 완성해주세요.
+예를 들어 선행 스킬 순서가 스파크 → 라이트닝 볼트 → 썬더일때, 썬더를 배우려면 먼저 라이트닝 볼트를 배워야 하고, 라이트닝 볼트를 배우려면 먼저 스파크를 배워야 합니다.
 
-제한사항
-numbers는 길이 1 이상 7 이하인 문자열입니다.
-numbers는 0~9까지 숫자만으로 이루어져 있습니다.
-013은 0, 1, 3 숫자가 적힌 종이 조각이 흩어져있다는 의미입니다.
+위 순서에 없는 다른 스킬(힐링 등)은 순서에 상관없이 배울 수 있습니다. 따라서 스파크 → 힐링 → 라이트닝 볼트 → 썬더와 같은 스킬트리는 가능하지만, 썬더 → 스파크나 라이트닝 볼트 → 스파크 → 힐링 → 썬더와 같은 스킬트리는 불가능합니다.
 
+선행 스킬 순서 skill과 유저들이 만든 스킬트리1를 담은 배열 skill_trees가 매개변수로 주어질 때, 가능한 스킬트리 개수를 return 하는 solution 함수를 작성해주세요.
+
+제한 조건
+스킬은 알파벳 대문자로 표기하며, 모든 문자열은 알파벳 대문자로만 이루어져 있습니다.
+스킬 순서와 스킬트리는 문자열로 표기합니다.
+예를 들어, C → B → D 라면 CBD로 표기합니다
+선행 스킬 순서 skill의 길이는 1 이상 26 이하이며, 스킬은 중복해 주어지지 않습니다.
+skill_trees는 길이 1 이상 20 이하인 배열입니다.
+skill_trees의 원소는 스킬을 나타내는 문자열입니다.
+skill_trees의 원소는 길이가 2 이상 26 이하인 문자열이며, 스킬이 중복해 주어지지 않습니다.
 입출력 예
-numbers	return
-17	3
-011	2
+skill	skill_trees	return
+"CBD"	["BACDE", "CBADF", "AECB", "BDA"]	2
 입출력 예 설명
-예제 #1
-[1, 7]으로는 소수 [7, 17, 71]를 만들 수 있습니다.
+BACDE: B 스킬을 배우기 전에 C 스킬을 먼저 배워야 합니다. 불가능한 스킬트립니다.
+CBADF: 가능한 스킬트리입니다.
+AECB: 가능한 스킬트리입니다.
+BDA: B 스킬을 배우기 전에 C 스킬을 먼저 배워야 합니다. 불가능한 스킬트리입니다.
 
-예제 #2
-[0, 1, 1]으로는 소수 [11, 101]를 만들 수 있습니다.
-
-11과 011은 같은 숫자로 취급합니다.
 
 
 */
-using namespace std;
-
-int solution(string numbers) 
-{
-	//http://dumpsys.blogspot.com/2015/03/algorithm-binary-counting-power-set.html
-	int nSize = numbers.length();
-	
-	/////////////////////////////////////////////////
-	//! 3자리 비트마스크 조합 -> 비트마스크로 조합을 가진다.!!
-	int n = nSize;
-	vector<string>	vecNum;
-	for (int i = 0; i < (1 << (n)); i++)
-	{
-		string	strTemp;
-		for (int j = 0; j < n; j++) 
-		{
-			if (i & (1 << j))
-			{
-				//printf("%c ", numbers[j]);
-				strTemp += numbers[j];
-			}
-		}
-		//printf("\n");
-
-		if(strTemp.length() > 0)
-			vecNum.push_back(strTemp);
-	}
-
-	sort(vecNum.begin(), vecNum.end());
-	vecNum.erase(unique(vecNum.begin(), vecNum.end()), vecNum.end());
 
 
-	vector<int>	vecAllNum;
-	for (size_t i = 0; i < vecNum.size(); i++)
-	{
-		string	strTemp = vecNum[i];
-		//! 소팅을 해주고 순열을 구해야지 전체 순열이 제대로 얻어와 진다!!
-		sort(strTemp.begin(), strTemp.end());
 
-		do {
-			int nValue = atoi(strTemp.c_str());
-
-			vecAllNum.push_back(nValue);
-
-		} while (next_permutation(strTemp.begin(), strTemp.end()));
-
-	}
+int solution(string skill, vector<string> skill_trees) {
 	int answer = 0;
 
-	sort(vecAllNum.begin(), vecAllNum.end());
-	vecAllNum.erase(unique(vecAllNum.begin(), vecAllNum.end()), vecAllNum.end());
 
-	for (size_t i = 0; i < vecAllNum.size(); i++)
+
+	for (size_t i = 0; i < skill_trees.size(); i++)
 	{
-		bool bflag = true;
-		int nValue = vecAllNum[i];
+		int naChk[26] = { -1, };
+		for (size_t i = 0; i < 26; i++)
+			naChk[i] = -1;
 
-		if (nValue < 2)
-			continue;
-
-		for (int j = 2; j < nValue / 2 + 1; j++)
+		for (size_t j = 0; j < skill.length(); j++)
 		{
-			if (nValue % j == 0)
-			{
-				bflag = false;
-				break;
-			}
+			int nFindIdx = skill_trees[i].find(skill[j]);
+			
+			naChk[j] = nFindIdx;
 		}
 
-		if (bflag)
+		//! 선행스킬과 연관이 없는경우
+		int nT = *max_element(naChk, naChk + skill.length());
+		if (nT == -1)
 		{
 			answer++;
+			break;
 		}
 
+		//! 앞뒤값을 비교하며 확인해야한다.
+		// 1. 앞에가 -1이 나오면 뒤에 숫자가 있는경우 실패
+		// 2. 마지막 값이 있는 곳 이후로는 쭉 -1이 나와도됌
+		// 3. 앞에 숫자가 뒤에 숫자보다 클수 없음
+
+		bool bFlag = true;
+		for (size_t j = 0; j < skill.length() - 1; j++)
+		{
+			if (naChk[j] > naChk[j + 1])
+				continue;
+
+			bFlag = false;
+		}
+
+		if(bFlag == true)
+			answer++;
 	}
 
+	//answer = skill_trees.size() - answer;
 	return answer;
 }
 
 
+
 int main()
 {
+	vector<string>	vecTemp;
 
-	solution("48924");
+	const int nTmp1 = 1;
+	string strTmp1[nTmp1] = { "CED"};
+	//const int nTmp1 = 4;
+	//string strTmp1[nTmp1] = { "BACDE", "CBADF", "AECB", "BDA" };
+	vecTemp.assign(strTmp1, strTmp1 + nTmp1);
+
+
+	//solution("CBD", vecTemp);
+	
+
+	solution("CBD", vecTemp);
+
 
 	return 0;
 }

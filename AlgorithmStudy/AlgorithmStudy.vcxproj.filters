@@ -402,5 +402,14 @@
     <ClCompile Include="Finish\Programmers_42584.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Finish\Programmers_42839.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Finish\CLOUD_NHN_PreTest_1_2020.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Finish\CLOUD_NHN_PreTest_2_2020.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
