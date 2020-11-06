@@ -51,64 +51,116 @@ BDA: B 스킬을 배우기 전에 C 스킬을 먼저 배워야 합니다. 불가
 
 
 
-int solution(string skill, vector<string> skill_trees) {
-	int answer = 0;
+//int solution(string skill, vector<string> skill_trees) {
+//	int answer = 0;
+//
+//
+//
+//	for (size_t i = 0; i < skill_trees.size(); i++)
+//	{
+//		int naChk[26] = { -1, };
+//		for (size_t i = 0; i < 26; i++)
+//			naChk[i] = -1;
+//
+//		for (size_t j = 0; j < skill.length(); j++)
+//		{
+//			int nFindIdx = skill_trees[i].find(skill[j]);
+//			
+//			naChk[j] = nFindIdx;
+//		}
+//
+//		//! 선행스킬과 연관이 없는경우
+//		int nT = *max_element(naChk, naChk + skill.length());
+//		if (nT == -1)
+//		{
+//			answer++;
+//			break;
+//		}
+//
+//		//! 앞뒤값을 비교하며 확인해야한다.
+//		// 1. 앞에가 -1이 나오면 뒤에 숫자가 있는경우 실패
+//		// 2. 마지막 값이 있는 곳 이후로는 쭉 -1이 나와도됌
+//		// 3. 앞에 숫자가 뒤에 숫자보다 클수 없음
+//
+//		bool bFlag = true;
+//		for (size_t j = 0; j < skill.length() - 1; j++)
+//		{
+//			//! 앞에가 -1이면 실패임
+//			if (naChk[j] == -1)
+//			{
+//				bFlag = false;
+//				break;
+//			}
+//
+//
+//			if (naChk[j] > naChk[j + 1])
+//			{
+//				//! 여기서 뒷부분이 전부 -1이면 괜찮음
+//				int nT = *max_element(naChk + j + 1, naChk + skill.length() - 1 + 1);
+//				if (nT == -1)
+//				{
+//					//answer++;
+//					break;
+//				}
+//
+//				bFlag = false;
+//				break;
+//			}
+//
+//		}
+//
+//		if(bFlag == true)
+//			answer++;
+//	}
+//
+//	//answer = skill_trees.size() - answer;
+//	return answer;
+//}
 
-
-
-	for (size_t i = 0; i < skill_trees.size(); i++)
+////////////////////////////////////////////////////////////
+//참고 : https://dvpzeekke.tistory.com/43
+int IsCanSkillBuild(string skill, string skillUnit)
+{
+	string strTemp = "";
+	for (size_t i = 0; i < skillUnit.length(); i++)
 	{
-		int naChk[26] = { -1, };
-		for (size_t i = 0; i < 26; i++)
-			naChk[i] = -1;
+		int nFind = skill.find(skillUnit[i]);
 
-		for (size_t j = 0; j < skill.length(); j++)
+		if (nFind >= 0)
 		{
-			int nFindIdx = skill_trees[i].find(skill[j]);
-			
-			naChk[j] = nFindIdx;
+			strTemp += skillUnit[i];
 		}
-
-		//! 선행스킬과 연관이 없는경우
-		int nT = *max_element(naChk, naChk + skill.length());
-		if (nT == -1)
-		{
-			answer++;
-			break;
-		}
-
-		//! 앞뒤값을 비교하며 확인해야한다.
-		// 1. 앞에가 -1이 나오면 뒤에 숫자가 있는경우 실패
-		// 2. 마지막 값이 있는 곳 이후로는 쭉 -1이 나와도됌
-		// 3. 앞에 숫자가 뒤에 숫자보다 클수 없음
-
-		bool bFlag = true;
-		for (size_t j = 0; j < skill.length() - 1; j++)
-		{
-			if (naChk[j] > naChk[j + 1])
-				continue;
-
-			bFlag = false;
-		}
-
-		if(bFlag == true)
-			answer++;
 	}
 
-	//answer = skill_trees.size() - answer;
-	return answer;
+	int nFind = skill.find(strTemp);
+
+	if (nFind == 0)
+		return 1;
+	else
+		return 0;
 }
 
+
+int solution(string skill, vector<string> skill_trees) {
+	int answer = 0;
+	for (size_t i = 0; i < skill_trees.size(); i++)
+	{
+		answer += IsCanSkillBuild(skill, skill_trees[i]);
+	}
+
+
+	return answer;
+}
 
 
 int main()
 {
 	vector<string>	vecTemp;
 
-	const int nTmp1 = 1;
-	string strTmp1[nTmp1] = { "CED"};
-	//const int nTmp1 = 4;
-	//string strTmp1[nTmp1] = { "BACDE", "CBADF", "AECB", "BDA" };
+	//const int nTmp1 = 1;
+	//string strTmp1[nTmp1] = { "CEFD"};
+	const int nTmp1 = 4;
+	string strTmp1[nTmp1] = { "BACDE", "CBADF", "AECB", "BDA" };
 	vecTemp.assign(strTmp1, strTmp1 + nTmp1);
 
 
