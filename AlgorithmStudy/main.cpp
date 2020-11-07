@@ -12,163 +12,77 @@
 //! 백터 사용
 #include <vector>
 
+#include <queue>
+
+
 using namespace std;
 
 
 /*
 
-https://programmers.co.kr/learn/courses/30/lessons/49993
+https://programmers.co.kr/learn/courses/30/lessons/42586
+
+
 
 문제 설명
-선행 스킬이란 어떤 스킬을 배우기 전에 먼저 배워야 하는 스킬을 뜻합니다.
+프로그래머스 팀에서는 기능 개선 작업을 수행 중입니다. 각 기능은 진도가 100%일 때 서비스에 반영할 수 있습니다.
 
-예를 들어 선행 스킬 순서가 스파크 → 라이트닝 볼트 → 썬더일때, 썬더를 배우려면 먼저 라이트닝 볼트를 배워야 하고, 라이트닝 볼트를 배우려면 먼저 스파크를 배워야 합니다.
+또, 각 기능의 개발속도는 모두 다르기 때문에 뒤에 있는 기능이 앞에 있는 기능보다 먼저 개발될 수 있고, 이때 뒤에 있는 기능은 앞에 있는 기능이 배포될 때 함께 배포됩니다.
 
-위 순서에 없는 다른 스킬(힐링 등)은 순서에 상관없이 배울 수 있습니다. 따라서 스파크 → 힐링 → 라이트닝 볼트 → 썬더와 같은 스킬트리는 가능하지만, 썬더 → 스파크나 라이트닝 볼트 → 스파크 → 힐링 → 썬더와 같은 스킬트리는 불가능합니다.
+먼저 배포되어야 하는 순서대로 작업의 진도가 적힌 정수 배열 progresses와 각 작업의 개발 속도가 적힌 정수 배열 speeds가 주어질 때 각 배포마다 몇 개의 기능이 배포되는지를 return 하도록 solution 함수를 완성하세요.
 
-선행 스킬 순서 skill과 유저들이 만든 스킬트리1를 담은 배열 skill_trees가 매개변수로 주어질 때, 가능한 스킬트리 개수를 return 하는 solution 함수를 작성해주세요.
-
-제한 조건
-스킬은 알파벳 대문자로 표기하며, 모든 문자열은 알파벳 대문자로만 이루어져 있습니다.
-스킬 순서와 스킬트리는 문자열로 표기합니다.
-예를 들어, C → B → D 라면 CBD로 표기합니다
-선행 스킬 순서 skill의 길이는 1 이상 26 이하이며, 스킬은 중복해 주어지지 않습니다.
-skill_trees는 길이 1 이상 20 이하인 배열입니다.
-skill_trees의 원소는 스킬을 나타내는 문자열입니다.
-skill_trees의 원소는 길이가 2 이상 26 이하인 문자열이며, 스킬이 중복해 주어지지 않습니다.
+제한 사항
+작업의 개수(progresses, speeds배열의 길이)는 100개 이하입니다.
+작업 진도는 100 미만의 자연수입니다.
+작업 속도는 100 이하의 자연수입니다.
+배포는 하루에 한 번만 할 수 있으며, 하루의 끝에 이루어진다고 가정합니다. 예를 들어 진도율이 95%인 작업의 개발 속도가 하루에 4%라면 배포는 2일 뒤에 이루어집니다.
 입출력 예
-skill	skill_trees	return
-"CBD"	["BACDE", "CBADF", "AECB", "BDA"]	2
+progresses	speeds	return
+[93, 30, 55]	[1, 30, 5]	[2, 1]
+[95, 90, 99, 99, 80, 99]	[1, 1, 1, 1, 1, 1]	[1, 3, 2]
 입출력 예 설명
-BACDE: B 스킬을 배우기 전에 C 스킬을 먼저 배워야 합니다. 불가능한 스킬트립니다.
-CBADF: 가능한 스킬트리입니다.
-AECB: 가능한 스킬트리입니다.
-BDA: B 스킬을 배우기 전에 C 스킬을 먼저 배워야 합니다. 불가능한 스킬트리입니다.
+입출력 예 #1
+첫 번째 기능은 93% 완료되어 있고 하루에 1%씩 작업이 가능하므로 7일간 작업 후 배포가 가능합니다.
+두 번째 기능은 30%가 완료되어 있고 하루에 30%씩 작업이 가능하므로 3일간 작업 후 배포가 가능합니다. 하지만 이전 첫 번째 기능이 아직 완성된 상태가 아니기 때문에 첫 번째 기능이 배포되는 7일째 배포됩니다.
+세 번째 기능은 55%가 완료되어 있고 하루에 5%씩 작업이 가능하므로 9일간 작업 후 배포가 가능합니다.
+
+따라서 7일째에 2개의 기능, 9일째에 1개의 기능이 배포됩니다.
+
+입출력 예 #2
+모든 기능이 하루에 1%씩 작업이 가능하므로, 작업이 끝나기까지 남은 일수는 각각 5일, 10일, 1일, 1일, 20일, 1일입니다. 어떤 기능이 먼저 완성되었더라도 앞에 있는 모든 기능이 완성되지 않으면 배포가 불가능합니다.
+
+따라서 5일째에 1개의 기능, 10일째에 3개의 기능, 20일째에 2개의 기능이 배포됩니다.
+
 
 
 
 */
 
+vector<int> solution(vector<int> progresses, vector<int> speeds) {
+	vector<int> answer;
 
-
-//int solution(string skill, vector<string> skill_trees) {
-//	int answer = 0;
-//
-//
-//
-//	for (size_t i = 0; i < skill_trees.size(); i++)
-//	{
-//		int naChk[26] = { -1, };
-//		for (size_t i = 0; i < 26; i++)
-//			naChk[i] = -1;
-//
-//		for (size_t j = 0; j < skill.length(); j++)
-//		{
-//			int nFindIdx = skill_trees[i].find(skill[j]);
-//			
-//			naChk[j] = nFindIdx;
-//		}
-//
-//		//! 선행스킬과 연관이 없는경우
-//		int nT = *max_element(naChk, naChk + skill.length());
-//		if (nT == -1)
-//		{
-//			answer++;
-//			break;
-//		}
-//
-//		//! 앞뒤값을 비교하며 확인해야한다.
-//		// 1. 앞에가 -1이 나오면 뒤에 숫자가 있는경우 실패
-//		// 2. 마지막 값이 있는 곳 이후로는 쭉 -1이 나와도됌
-//		// 3. 앞에 숫자가 뒤에 숫자보다 클수 없음
-//
-//		bool bFlag = true;
-//		for (size_t j = 0; j < skill.length() - 1; j++)
-//		{
-//			//! 앞에가 -1이면 실패임
-//			if (naChk[j] == -1)
-//			{
-//				bFlag = false;
-//				break;
-//			}
-//
-//
-//			if (naChk[j] > naChk[j + 1])
-//			{
-//				//! 여기서 뒷부분이 전부 -1이면 괜찮음
-//				int nT = *max_element(naChk + j + 1, naChk + skill.length() - 1 + 1);
-//				if (nT == -1)
-//				{
-//					//answer++;
-//					break;
-//				}
-//
-//				bFlag = false;
-//				break;
-//			}
-//
-//		}
-//
-//		if(bFlag == true)
-//			answer++;
-//	}
-//
-//	//answer = skill_trees.size() - answer;
-//	return answer;
-//}
-
-////////////////////////////////////////////////////////////
-//참고 : https://dvpzeekke.tistory.com/43
-int IsCanSkillBuild(string skill, string skillUnit)
-{
-	string strTemp = "";
-	for (size_t i = 0; i < skillUnit.length(); i++)
-	{
-		int nFind = skill.find(skillUnit[i]);
-
-		if (nFind >= 0)
-		{
-			strTemp += skillUnit[i];
-		}
-	}
-
-	int nFind = skill.find(strTemp);
-
-	if (nFind == 0)
-		return 1;
-	else
-		return 0;
-}
-
-
-int solution(string skill, vector<string> skill_trees) {
-	int answer = 0;
-	for (size_t i = 0; i < skill_trees.size(); i++)
-	{
-		answer += IsCanSkillBuild(skill, skill_trees[i]);
-	}
+	//progresses.
+	//
+	//progresses.pop_back();
+	//progresses.front();
 
 
 	return answer;
 }
 
-
 int main()
 {
-	vector<string>	vecTemp;
-
-	//const int nTmp1 = 1;
-	//string strTmp1[nTmp1] = { "CEFD"};
-	const int nTmp1 = 4;
-	string strTmp1[nTmp1] = { "BACDE", "CBADF", "AECB", "BDA" };
-	vecTemp.assign(strTmp1, strTmp1 + nTmp1);
+	vector<int> progresses;
+	vector<int> speeds;
 
 
-	//solution("CBD", vecTemp);
-	
+	const int nTmp1 = 3;
+	int naTmp1[nTmp1] = { 93, 30, 55 };
+	int naTmp2[nTmp1] = { 1, 30, 5 };
+	progresses.assign(naTmp1, naTmp1 + nTmp1);
+	speeds.assign(naTmp2, naTmp2 + nTmp1);
 
-	solution("CBD", vecTemp);
-
+	solution(progresses, speeds);
 
 	return 0;
 }
