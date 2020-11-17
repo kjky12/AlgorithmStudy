@@ -20,69 +20,141 @@ using namespace std;
 
 /*
 
-https://programmers.co.kr/learn/courses/30/lessons/42586
+https://programmers.co.kr/learn/courses/30/lessons/1829
 
 
+카카오 프렌즈 컬러링북
+출판사의 편집자인 어피치는 네오에게 컬러링북에 들어갈 원화를 그려달라고 부탁하여 여러 장의 그림을 받았다. 여러 장의 그림을 난이도 순으로 컬러링북에 넣고 싶었던 어피치는 영역이 많으면 색칠하기가 까다로워 어려워진다는 사실을 발견하고 그림의 난이도를 영역의 수로 정의하였다. (영역이란 상하좌우로 연결된 같은 색상의 공간을 의미한다.)
 
-문제 설명
-프로그래머스 팀에서는 기능 개선 작업을 수행 중입니다. 각 기능은 진도가 100%일 때 서비스에 반영할 수 있습니다.
+그림에 몇 개의 영역이 있는지와 가장 큰 영역의 넓이는 얼마인지 계산하는 프로그램을 작성해보자.
 
-또, 각 기능의 개발속도는 모두 다르기 때문에 뒤에 있는 기능이 앞에 있는 기능보다 먼저 개발될 수 있고, 이때 뒤에 있는 기능은 앞에 있는 기능이 배포될 때 함께 배포됩니다.
+alt text
 
-먼저 배포되어야 하는 순서대로 작업의 진도가 적힌 정수 배열 progresses와 각 작업의 개발 속도가 적힌 정수 배열 speeds가 주어질 때 각 배포마다 몇 개의 기능이 배포되는지를 return 하도록 solution 함수를 완성하세요.
+위의 그림은 총 12개 영역으로 이루어져 있으며, 가장 넓은 영역은 어피치의 얼굴면으로 넓이는 120이다.
 
-제한 사항
-작업의 개수(progresses, speeds배열의 길이)는 100개 이하입니다.
-작업 진도는 100 미만의 자연수입니다.
-작업 속도는 100 이하의 자연수입니다.
-배포는 하루에 한 번만 할 수 있으며, 하루의 끝에 이루어진다고 가정합니다. 예를 들어 진도율이 95%인 작업의 개발 속도가 하루에 4%라면 배포는 2일 뒤에 이루어집니다.
-입출력 예
-progresses	speeds	return
-[93, 30, 55]	[1, 30, 5]	[2, 1]
-[95, 90, 99, 99, 80, 99]	[1, 1, 1, 1, 1, 1]	[1, 3, 2]
-입출력 예 설명
-입출력 예 #1
-첫 번째 기능은 93% 완료되어 있고 하루에 1%씩 작업이 가능하므로 7일간 작업 후 배포가 가능합니다.
-두 번째 기능은 30%가 완료되어 있고 하루에 30%씩 작업이 가능하므로 3일간 작업 후 배포가 가능합니다. 하지만 이전 첫 번째 기능이 아직 완성된 상태가 아니기 때문에 첫 번째 기능이 배포되는 7일째 배포됩니다.
-세 번째 기능은 55%가 완료되어 있고 하루에 5%씩 작업이 가능하므로 9일간 작업 후 배포가 가능합니다.
+입력 형식
+입력은 그림의 크기를 나타내는 m과 n, 그리고 그림을 나타내는 m × n 크기의 2차원 배열 picture로 주어진다. 제한조건은 아래와 같다.
 
-따라서 7일째에 2개의 기능, 9일째에 1개의 기능이 배포됩니다.
+1 <= m, n <= 100
+picture의 원소는 0 이상 2^31 - 1 이하의 임의의 값이다.
+picture의 원소 중 값이 0인 경우는 색칠하지 않는 영역을 뜻한다.
+출력 형식
+리턴 타입은 원소가 두 개인 정수 배열이다. 그림에 몇 개의 영역이 있는지와 가장 큰 영역은 몇 칸으로 이루어져 있는지를 리턴한다.
 
-입출력 예 #2
-모든 기능이 하루에 1%씩 작업이 가능하므로, 작업이 끝나기까지 남은 일수는 각각 5일, 10일, 1일, 1일, 20일, 1일입니다. 어떤 기능이 먼저 완성되었더라도 앞에 있는 모든 기능이 완성되지 않으면 배포가 불가능합니다.
-
-따라서 5일째에 1개의 기능, 10일째에 3개의 기능, 20일째에 2개의 기능이 배포됩니다.
+예제 입출력
+m	n	picture	answer
+6	4	[[1, 1, 1, 0], [1, 2, 2, 0], [1, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 3], [0, 0, 0, 3]]	[4, 5]
+예제에 대한 설명
+예제로 주어진 그림은 총 4개의 영역으로 구성되어 있으며, 왼쪽 위의 영역과 오른쪽의 영역은 모두 1로 구성되어 있지만 상하좌우로 이어져있지 않으므로 다른 영역이다. 가장 넓은 영역은 왼쪽 위 1이 차지하는 영역으로 총 5칸이다.
 
 
 
 
 */
 
-vector<int> solution(vector<int> progresses, vector<int> speeds) {
-	vector<int> answer;
+//! 좌,하,우,상
+int nDx[4] = {-1,0,1,0};
+int nDy[4] = {0,1,0,-1};
 
-	//progresses.
-	//
-	//progresses.pop_back();
-	//progresses.front();
+vector<vector<int>> pictureCheck;
+int nMaxX = 0;
+int nMaxY = 0;
+int dfs(int nX, int nY, const int nColor, const vector<vector<int>> *picture)
+{
+	int nPlus = 0;
+	if (nX < 0 || nX >= nMaxX)
+		return nPlus;
+
+	if (nY < 0 || nY >= nMaxY)
+		return nPlus;
+
+	
+	//! 이미 확인한 곳
+	if(pictureCheck[nX][nY] == true)
+		return nPlus;
 
 
+	if (nColor == picture->at(nX).at(nY))
+	{
+		nPlus += 1;
+		pictureCheck[nX][nY] = true;
+
+		for (size_t i = 0; i < 4; i++)
+		{
+			nPlus += dfs(nX + nDx[i], nY + nDy[i], nColor, picture);
+		}
+	}
+
+
+	return nPlus;
+}
+
+
+
+
+// 전역 변수를 정의할 경우 함수 내에 초기화 코드를 꼭 작성해주세요.
+vector<int> solution(int m, int n, vector<vector<int>> picture) {
+	int number_of_area = 0;
+	int max_size_of_one_area = 0;
+
+	vector<int> vecTmppp;
+
+	nMaxX = m;
+	nMaxY = n;
+	pictureCheck.resize(m, vector<int>(n));
+
+	for (size_t i = 0; i < m; i++)
+	{
+		for (size_t j = 0; j < n; j++)
+		{
+			if (pictureCheck[i][j] == true)
+				continue;
+
+			//! 0은 공백..
+			if (picture[i][j] != 0)
+			{
+				int nAreaValue = 0;
+				//int nAreaValue = dfs(i, j, picture[i][j], &picture);
+				for (size_t k = 0; k < 4; k++)
+				{
+					nAreaValue += dfs(i + nDx[k], j + nDy[k], picture[i][j], &picture);
+				}
+
+
+
+				vecTmppp.push_back(nAreaValue);
+			}
+			else
+			{
+				pictureCheck[i][j] = true;
+			}
+		}
+
+	}
+
+	
+
+	vector<int> answer(2);
+	answer[0] = vecTmppp.size();
+	answer[1] = *max_element(vecTmppp.begin(), vecTmppp.end());
 	return answer;
 }
 
 int main()
 {
-	vector<int> progresses;
-	vector<int> speeds;
+	const int m = 6;
+	const int n = 4;
+	vector<vector<int>> picture(m, vector<int>(n));
 
 
-	const int nTmp1 = 3;
-	int naTmp1[nTmp1] = { 93, 30, 55 };
-	int naTmp2[nTmp1] = { 1, 30, 5 };
-	progresses.assign(naTmp1, naTmp1 + nTmp1);
-	speeds.assign(naTmp2, naTmp2 + nTmp1);
-
-	solution(progresses, speeds);
+	int naTmp1[m][n] = { {1, 1, 1, 0}, {1, 2, 2, 0}, {1, 0, 0, 1}, {0, 0, 0, 1}, {0, 0, 0, 3}, {0, 0, 0, 3} };
+	for (size_t i = 0; i < picture.size(); i++)
+	{
+		vector<int>	vecTmp;
+		vecTmp.assign(naTmp1[i], naTmp1[i] + n);
+		picture[i] = vecTmp;
+	}
+	solution(m, n, picture);
 
 	return 0;
 }
